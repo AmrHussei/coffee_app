@@ -66,5 +66,4 @@ class Routes {
   static const String forgetPassword = "/forgetPassword";
   static const String mainScreen = "/mainScreen";
   static const String cartScreen = "/cartScreen";
-  static const paymentScreen = '/paymentScreen';
 }

@@ -5,8 +5,6 @@ import 'package:get_storage/get_storage.dart';
 import '../../model/product_model.dart';
 import '../../services/product_services.dart';
 
-
-
 class ProductController extends GetxController {
   RxList<ProductModel> productslist = <ProductModel>[].obs;
   RxList<ProductModel> serchlist = <ProductModel>[].obs;
@@ -15,6 +13,59 @@ class ProductController extends GetxController {
   RxBool isFav = false.obs;
   var getStorage = GetStorage();
   final TextEditingController serchController = TextEditingController();
+  int indexOfCategory = 0;
+  final List listOfCoffeeCategory = [
+    'Cappuccino',
+    'Espresso',
+    'Latte',
+    'Cortadito',
+    'Black'
+  ];
+
+  final List rateList = [
+    5.0,
+    4.8,
+    4.6,
+    4.5,
+    4.3,
+    4.0,
+    4.1,
+    3.6,
+    2.6,
+    3.6,
+    5.0,
+    5.0,
+    4.9,
+    3.6,
+    4.6,
+    3.9,
+    4.4,
+    4.0,
+    4.1,
+    3.1,
+  ];
+  final List priceList = [
+    5.5,
+    6.6,
+    2.2,
+    9.8,
+    5.1,
+    6.0,
+    5.0,
+    6.0,
+    2.5,
+    5.3,
+    5.6,
+    2.9,
+    5.8,
+    4.7,
+    2.5,
+    2.7,
+    5.1,
+    5.6,
+    5.8,
+    4.5
+  ];
 
   @override
   void onInit() {
@@ -73,5 +124,25 @@ class ProductController extends GetxController {
   void clearSerch() {
     serchController.clear();
     addSerchItemToList('');
+  }
+
+  void indexOfCoffeeCategory(index) {
+    indexOfCategory = index;
+    update();
+  }
+
+  bool isindexOfCoffeeCategory(index) {
+    return indexOfCategory == index;
+  }
+
+  ProductModel spcialCoffeeCategory(String serchName) {
+    return productslist.firstWhere((serch) {
+      var serchTitle = serch.title!.toLowerCase();
+      return serchTitle.contains(serchName.toLowerCase());
+    });
+  }
+
+  int findIndexOffavoritInProductList(int id) {
+    return productslist.indexWhere((element) => element.id == id);
   }
 }

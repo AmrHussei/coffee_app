@@ -34,7 +34,7 @@ class MainScreen extends StatelessWidget {
               ),
               GButton(
                 icon: Icons.shopping_bag_rounded,
-                text: 'Orders',
+                text: 'Cart',
               ),
               GButton(
                 icon: Icons.person,
