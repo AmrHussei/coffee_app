@@ -53,11 +53,13 @@ class CartItems extends StatelessWidget {
               children: [
                 Text(
                   productModel.title!,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                      overflow: TextOverflow.ellipsis),
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 SizedBox(
                   height: 5.h,

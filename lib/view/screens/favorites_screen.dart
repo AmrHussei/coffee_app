@@ -18,6 +18,7 @@ class FavorivesScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
+        leading: const Text(''),
         title: const Text('Favorites'),
         centerTitle: true,
         backgroundColor: mainColor,

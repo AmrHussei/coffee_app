@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../routes/routes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/theme.dart';
 
 class EmptyCart extends StatelessWidget {
@@ -13,9 +11,9 @@ class EmptyCart extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.shopping_bag_rounded,
-            size: 150,
+            size: 150.sp,
           ),
           RichText(
             text: const TextSpan(
@@ -48,17 +46,6 @@ class EmptyCart extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          MaterialButton(
-            onPressed: () {
-              Get.offNamed(Routes.mainScreen);
-            },
-            color: mainColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            height: 40,
-            minWidth: 150,
-            child: const Text('Go to Home'),
-          )
         ],
       ),
     );

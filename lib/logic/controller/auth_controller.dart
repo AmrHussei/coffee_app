@@ -15,7 +15,11 @@ class AuthController extends GetxController {
   var displayUserName = ''.obs;
   var displayUserPhoto = ''.obs;
   var displayUserEmail = ''.obs;
+
+  var userNameGetStorage = GetStorage();
+  var usePhotoGetStorage = GetStorage();
   bool isSignIn = false;
+
   var googleSignIn = GoogleSignIn();
 
   static final authBox = GetStorage();
@@ -31,15 +35,16 @@ class AuthController extends GetxController {
   }
 
   @override
-  void onInit() {
-    googleSinUpApp();
+  void onInit() async {
+    await userNameGetStorage.read('userNameGetStorage');
+    await usePhotoGetStorage.read('usePhotoGetStorage');
     super.onInit();
   }
 
   void signUpUsingFirebase({
     required String email,
     required String password,
-    required String name,
+    required String? name,
   }) async {
     final String message;
     try {
@@ -49,9 +54,10 @@ class AuthController extends GetxController {
         password: password,
       )
           .then((value) {
-        displayUserName.value = name;
+        displayUserName.value = name ?? '';
 
         auth.currentUser!.updateDisplayName(displayUserName.value);
+        userNameGetStorage.write('userNameGetStorage', displayUserName.value);
       });
       Get.offAllNamed(Routes.mainScreen);
 
@@ -88,6 +94,7 @@ class AuthController extends GetxController {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
         displayUserName.value = auth.currentUser!.displayName!;
+        userNameGetStorage.write('userNameGetStorage', displayUserName.value);
       });
       Get.offAllNamed(Routes.mainScreen);
       isSignIn = true;
@@ -168,7 +175,9 @@ class AuthController extends GetxController {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       displayUserName.value = googleUser!.displayName!;
+      userNameGetStorage.write('userNameGetStorage', displayUserName.value);
       displayUserPhoto.value = googleUser.photoUrl!;
+      usePhotoGetStorage.write('usePhotoGetStorage', displayUserPhoto.value);
       displayUserEmail.value = googleUser.email;
 
       GoogleSignInAuthentication googleSignInAuthentication =
@@ -203,7 +212,9 @@ class AuthController extends GetxController {
       await auth.signOut();
       await GoogleSignIn().signOut();
       displayUserName.value = '';
+      userNameGetStorage.write('userNameGetStorage', displayUserName.value);
       displayUserPhoto.value = '';
+      usePhotoGetStorage.write('usePhotoGetStorage', displayUserPhoto.value);
       Get.offAllNamed(Routes.getStart);
       update();
       isSignIn = false;

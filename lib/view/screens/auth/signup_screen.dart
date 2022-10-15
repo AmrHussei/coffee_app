@@ -56,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
               width: double.infinity,
               height: 625.h,
               child: Padding(
-                padding: const EdgeInsets.only(top: 40, right: 25, left: 25),
+                padding: EdgeInsets.only(top: 40.h, right: 20.h, left: 20.h),
                 child: Form(
                   key: formKey,
                   child: Column(

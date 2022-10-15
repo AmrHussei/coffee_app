@@ -182,6 +182,7 @@ class CardItem extends StatelessWidget {
                     children: [
                       Text(
                         title!,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: Colors.black.withAlpha(200),
                             fontSize: 19.sp,

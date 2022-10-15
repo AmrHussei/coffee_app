@@ -21,178 +21,176 @@ class LogInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextUtils(
-              text: 'LOG',
-              fontSize: 26.sp,
-              fontWeight: FontWeight.w500,
-              color: mainColor,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            TextUtils(
-              text: 'IN',
-              fontSize: 26.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextUtils(
+                text: 'LOG',
+                fontSize: 26.sp,
+                fontWeight: FontWeight.w500,
+                color: mainColor,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              TextUtils(
+                text: 'IN',
+                fontSize: 26.sp,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ],
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 625.h,
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40, right: 25, left: 25),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 100.h,
-                        width: 100.w,
-                        child: Image.asset('images/logo.png'),
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      AuthTextFormFiled(
-                        controller: emailController,
-                        obscureText: false,
-                        textInputType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (!RegExp(validationEmail).hasMatch(value)) {
-                            return 'Enter valid email';
-                          }
-                        },
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: mainColor,
-                          size: 28.sp,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 625.h,
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 40.h, right: 20.h, left: 20.h),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 100.h,
+                          width: 100.w,
+                          child: Image.asset('images/logo.png'),
                         ),
-                        suffixIcon: const Text(''),
-                        hintText: 'Enter your email',
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 50,
-                      ),
-                      GetBuilder<AuthController>(builder: (_) {
-                        return AuthTextFormFiled(
-                          controller: passwordController,
-                          obscureText: authController.isVisability,
-                          textInputType: TextInputType.visiblePassword,
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        AuthTextFormFiled(
+                          controller: emailController,
+                          obscureText: false,
+                          textInputType: TextInputType.emailAddress,
                           validator: (value) {
-                            if (value.toString().length < 6) {
-                              return 'The password must be at least 6 characters long';
-                            } else {
-                              return null;
+                            if (!RegExp(validationEmail).hasMatch(value)) {
+                              return 'Enter valid email';
                             }
                           },
                           prefixIcon: Icon(
-                            Icons.lock,
-                            size: 28.sp,
+                            Icons.email,
                             color: mainColor,
+                            size: 28.sp,
                           ),
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                authController.visabilityFun();
-                              },
-                              icon: authController.isVisability
-                                  ? const Icon(
-                                      Icons.visibility,
-                                      color: Colors.grey,
-                                    )
-                                  : const Icon(
-                                      Icons.visibility_off,
-                                      color: Colors.grey,
-                                    )),
-                          hintText: 'Enter your password',
-                        );
-                      }),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.forgetPassword);
-                          },
-                          child: const Text(
-                            'Forget password ?',
-                            style: TextStyle(fontSize: 15),
+                          suffixIcon: const Text(''),
+                          hintText: 'Enter your email',
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        GetBuilder<AuthController>(builder: (_) {
+                          return AuthTextFormFiled(
+                            controller: passwordController,
+                            obscureText: authController.isVisability,
+                            textInputType: TextInputType.visiblePassword,
+                            validator: (value) {
+                              if (value.toString().length < 6) {
+                                return 'The password must be at least 6 characters long';
+                              } else {
+                                return null;
+                              }
+                            },
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              size: 28.sp,
+                              color: mainColor,
+                            ),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  authController.visabilityFun();
+                                },
+                                icon: authController.isVisability
+                                    ? const Icon(
+                                        Icons.visibility,
+                                        color: Colors.grey,
+                                      )
+                                    : const Icon(
+                                        Icons.visibility_off,
+                                        color: Colors.grey,
+                                      )),
+                            hintText: 'Enter your password',
+                          );
+                        }),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              Get.toNamed(Routes.forgetPassword);
+                            },
+                            child: const Text(
+                              'Forget password ?',
+                              style: TextStyle(fontSize: 15),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 19.2,
-                      ),
-                      SizedBox(height: 100.h),
-                      GetBuilder<AuthController>(builder: (_) {
-                        return AuthButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              String email = emailController.text;
-                              String password = emailController.text.trim();
-                              authController.loginUsingFirebase(
-                                email: email,
-                                password: password,
+                        SizedBox(height: 110.h),
+                        GetBuilder<AuthController>(builder: (_) {
+                          return AuthButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                String email = emailController.text;
+                                String password = emailController.text.trim();
+                                authController.loginUsingFirebase(
+                                  email: email,
+                                  password: password,
+                                );
+                              }
+                            },
+                            text: 'LOG IN',
+                          );
+                        }),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        TextUtils(
+                          text: 'OR',
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GetBuilder<AuthController>(builder: (_) {
+                              return InkWell(
+                                onTap: () {
+                                  authController.googleSinUpApp();
+                                },
+                                child: SizedBox(
+                                    height: 35.h,
+                                    width: 35.w,
+                                    child: Image.asset('images/google.png')),
                               );
-                            }
-                          },
-                          text: 'LOG IN',
-                        );
-                      }),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      TextUtils(
-                        text: 'OR',
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GetBuilder<AuthController>(builder: (_) {
-                            return InkWell(
-                              onTap: () {
-                                authController.googleSinUpApp();
-                              },
-                              child: SizedBox(
-                                  height: 35.h,
-                                  width: 35.w,
-                                  child: Image.asset('images/google.png')),
-                            );
-                          }),
-                        ],
-                      )
-                    ],
+                            }),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            ContainerUnder(
-                onPressed: () {
-                  Get.toNamed(Routes.signUpScreen);
-                },
-                text: "Don't have an account ",
-                text2: 'sign up'),
-          ],
+              ContainerUnder(
+                  onPressed: () {
+                    Get.toNamed(Routes.signUpScreen);
+                  },
+                  text: "Don't have an account ",
+                  text2: 'sign up'),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

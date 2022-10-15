@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../logic/controller/cart_controller.dart';
@@ -16,6 +17,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Text(''),
         title: const Text('cart'),
         centerTitle: true,
         backgroundColor: mainColor,
@@ -30,7 +32,7 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.80,
+                    height: 620.h,
                     child: ListView.separated(
                       itemBuilder: ((context, index) {
                         return CartItems(
@@ -46,9 +48,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * 0.01,
-                        top: MediaQuery.of(context).size.height * 0.02),
+                    padding: EdgeInsets.only(bottom: 5.h, top: 10.h),
                     child: BottomOfCartScreen(),
                   )
                 ],

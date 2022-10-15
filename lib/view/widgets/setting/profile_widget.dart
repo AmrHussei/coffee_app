@@ -13,36 +13,37 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx((() {
-      return Column(
-        children: [
-          Container(
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: NetworkImage(authController.displayUserPhoto.value),
-                  fit: BoxFit.cover),
+    return Column(
+      children: [
+        Container(
+          height: 80.h,
+          width: 80.h,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                '${authController.usePhotoGetStorage.read('usePhotoGetStorage')}',
+              ),
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextUtils(
-                text: settingController
-                    .capitalize(authController.displayUserName.value),
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black.withOpacity(0.8),
-              ),
-            ],
-          )
-        ],
-      );
-    }));
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextUtils(
+              text:
+                  '${authController.userNameGetStorage.read('userNameGetStorage')}',
+              fontSize: 22.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.black.withOpacity(0.8),
+            ),
+          ],
+        )
+      ],
+    );
   }
 }
